@@ -1,11 +1,11 @@
 # Skroot
-www.mowagdy.com/skroot
+https://skroot.ae/skroot
 
 ## Installation
 
 ``` bash
 # clone the repo
-$ git clone https://gitlab.com/mowagdy/skroot.git my-project
+$ git clone https://github.com/sa3d01/skroot.git
 
 # go into app's directory
 $ cd my-project
@@ -146,7 +146,8 @@ This user has roles: _user_ and _admin_
 
 ## Backend Development
 
-**Mohamed Wagdy**
-
+**Mohamed Wagdy -- saad salem**
+* <https://www.linkedin.com/in/saad-salem-4362b4a8/>
 * <https://linkedin.com/in/mowagdy>
 * <https://github.com/mowagdy1>
+* <https://github.com/sa3d01>
