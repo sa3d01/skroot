@@ -1,0 +1,13 @@
+
+
+**(( code-smell using PHP-Mess-Detector ))**
+
+vendor/bin/phpmd app html cleancode,codesize,controversial,design,naming,unusedcode > phpmd.html
+
+vendor/bin/phpmd app html ./phpmd-ruleset.xml > phpmd.html
+
+
+
+**(( code-style using PHP-CodeSniffer ))**
+
+vendor/bin/phpcs app
