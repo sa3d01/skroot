@@ -16,30 +16,29 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-
-            $car = CarBrand::whereTranslation("name", $row["Manufacturer"])->first();
+            $car = CarBrand::whereTranslation("name", $row["manufacturer"])->first();
             if (!$car) {
                 $car = CarBrand::create([
-                    "en" => ["name" => $row["Manufacturer"]],
-                    "ar" => ["name" => $row["Manufacturer"]],
+                    "en" => ["name" => $row["manufacturer"]],
+                    "ar" => ["name" => $row["manufacturer"]],
                 ]);
             }
 
             $carModel = CarBrandModel::where('car_brand_id', $car->id)
-                ->whereTranslation("name", $row["Car Model"])->first();
+                ->whereTranslation("name", $row["car_model"])->first();
             if (!$carModel) {
                 $carModel = CarBrandModel::create([
                     'car_brand_id' => $car->id,
-                    "en" => ["name" => $row["Car Model"]],
-                    "ar" => ["name" => $row["Car Model"]],
+                    "en" => ["name" => $row["car_model"]],
+                    "ar" => ["name" => $row["car_model"]],
                 ]);
             }
 
-            $partCategory = PartCategory::whereTranslation("name", $row["Category"])->first();
+            $partCategory = PartCategory::whereTranslation("name", $row["category"])->first();
             if (!$partCategory) {
                 $partCategory = PartCategory::create([
-                    "en" => ["name" => $row["Category"]],
-                    "ar" => ["name" => $row["Category"]],
+                    "en" => ["name" => $row["category"]],
+                    "ar" => ["name" => $row["category"]],
                 ]);
             }
 
@@ -47,26 +46,26 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
                 "part_category_id" => $partCategory->id,
                 "car_brand_id" => $car->id,
                 "car_brand_model_id" => $carModel->id,
-                "year" => $row["Year"],
-                "part_number" => $row["Part Number"],
+                "year" => $row["year"],
+                "part_number" => $row["part_number"],
             ])->first();
             if (!$product) {
-                $price = str_replace("$", "", $row["Price"]);
+                $price = str_replace("$", "", $row["price"]);
                 Product::create([
                     "type" => ProductTypes::PART,
                     "part_category_id" => $partCategory->id,
                     "car_brand_id" => $car->id,
                     "car_brand_model_id" => $carModel->id,
-                    "year" => $row["Year"],
+                    "year" => $row["year"],
                     "price" => (double)$price,
-                    "part_number" => $row["Part Number"],
+                    "part_number" => $row["part_number"],
                     "en" => [
-                        "name" => $row["Part Name"],
-                        "description" => $row["Part Name"],
+                        "name" => $row["part_name"],
+                        "description" => $row["part_name"],
                     ],
                     "ar" => [
-                        "name" => $row["Part Name"],
-                        "description" => $row["Part Name"],
+                        "name" => $row["part_name"],
+                        "description" => $row["part_name"],
                     ],
                 ]);
             }

@@ -13,10 +13,13 @@ use Excel;
 class PageController extends Controller
 {
     public function uploadExcel(Request $request){
+        ini_set('memory_limit', '-1');
+        ini_set('set_time_limit', '6000');
+        ini_set('max_execution_time', '6000');
         Excel::import(new CarBrandsImport, $request->file('excel'));
 
         return redirect('/')->with('success', 'All good!');
-//
+
 //        $arr=[];
 //        if($request->hasFile('excel')){
 //            Excel::load($request->file('excel')->getRealPath(), function ($reader) {
