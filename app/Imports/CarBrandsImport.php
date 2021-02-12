@@ -40,6 +40,7 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
                     "en" => ["name" => $row["category"]],
                     "ar" => ["name" => $row["category"]],
                 ]);
+                $partCategory->addMediaFromUrl($row["online_category_image"])->toMediaCollection('part_categories');
             }
 
             $product = Product::where([
@@ -51,7 +52,7 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
             ])->first();
             if (!$product) {
                 $price = str_replace("$", "", $row["price"]);
-                Product::create([
+                $product=Product::create([
                     "type" => ProductTypes::PART,
                     "part_category_id" => $partCategory->id,
                     "car_brand_id" => $car->id,
@@ -61,13 +62,14 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
                     "part_number" => $row["part_number"],
                     "en" => [
                         "name" => $row["part_name"],
-                        "description" => $row["part_name"],
+                        "description" => $row["discription"],
                     ],
                     "ar" => [
                         "name" => $row["part_name"],
-                        "description" => $row["part_name"],
+                        "description" => $row["discription"],
                     ],
                 ]);
+                $product->addMediaFromUrl($row["online_part_image"])->toMediaCollection('part_product_gallery');
             }
 
         }
