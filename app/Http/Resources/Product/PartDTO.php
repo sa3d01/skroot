@@ -2,12 +2,19 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Models\WishList;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PartDTO extends JsonResource
 {
     public function toArray($request)
     {
+
+        if(WishList::where(['user_id'=>\Auth::user()->id,'product_id'=>$this['id']])->first()){
+            $is_wished=true;
+        }else{
+            $is_wished=false;
+        }
         return [
             "id" => (int)$this["id"],
             'name' => [
@@ -46,6 +53,7 @@ class PartDTO extends JsonResource
             "price" => (double)$this["price"],
             "manufacturer" => "Dummy Manufacturer",
             "images_urls" => $this->images_urls,
+            'is_wished'=>$is_wished
         ];
     }
 }

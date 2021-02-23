@@ -12,33 +12,13 @@ use Excel;
 
 class PageController extends Controller
 {
-    public function uploadExcel(Request $request){
-        ini_set('memory_limit', '-1');
-        ini_set('set_time_limit', '6000');
-        ini_set('max_execution_time', '6000');
-        Excel::import(new CarBrandsImport, $request->file('excel'));
-
-        return redirect('/')->with('success', 'All good!');
-
-//        $arr=[];
-//        if($request->hasFile('excel')){
-//            Excel::load($request->file('excel')->getRealPath(), function ($reader) {
-//                foreach ($reader->toArray() as $key => $row) {
-//                    $data['Manufacturer'] = $row['Manufacturer'];
-//                    $data['Car Model'] = $row['Car Model'];
-//                    $data['Year'] = $row['Year'];
-//                    $data['Category'] = $row['Category'];
-//                    $data['Online Category Image'] = $row['Online Category Image'];
-//                    $data['Sub Category'] = $row['Sub Category'];
-//                    $data['Part Name'] = $row['Part Name'];
-//                    $data['Price'] = $row['Price'];
-//                    $data['Part Number'] = $row['Part Number'];
-//                    return $data;
-//                }
-//            });
-//        }
-//        return back();
-    }
+//    public function uploadExcel(Request $request){
+//        ini_set('memory_limit', '-1');
+//        ini_set('set_time_limit', '6000');
+//        ini_set('max_execution_time', '6000');
+//        Excel::import(new CarBrandsImport, $request->file('excel'));
+//        return redirect('/')->with('success', 'All good!');
+//    }
 
     public function terms()
     {

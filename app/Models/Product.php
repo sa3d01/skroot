@@ -60,4 +60,9 @@ class Product extends Model implements TranslatableContract, HasMedia
     {
         return $this->belongsTo(CarBrandModel::class);
     }
+
+    public function wish()
+    {
+        return $this->hasMany(WishList::class);
+    }
 }
