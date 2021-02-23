@@ -43,9 +43,7 @@ Route::group([
         Route::get('car-brands', 'CarBrandController@index');
         Route::get('car-brands/{carBrand}/models', 'CarBrandController@fetchModels');
         Route::get('part-categories', 'PartCategoryController@index');
-
-
-        Route::post('upload-excel', 'PageController@uploadExcel');
+//        Route::post('upload-excel', 'PageController@uploadExcel');
     });
     // Pages
     Route::group(['namespace' => 'General', 'prefix' => 'pages'], function () {
@@ -78,6 +76,11 @@ Route::group([
             Route::put('password', 'SettingController@updatePassword');
             //Route::put('phone', 'SettingController@updatePhone');
             Route::post('upload-avatar', 'SettingController@uploadAvatar');
+        });
+
+        Route::group(['prefix' => 'wish-list'], function () {
+            Route::get('/', 'WishListController@index');
+            Route::post('/{product}', 'WishListController@wishListModification');
         });
 
         Route::group(['prefix' => 'cars'], function () {
