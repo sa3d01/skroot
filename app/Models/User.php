@@ -118,4 +118,9 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(CarBrand::class, "car_brand_user");
     }
 
+    public function carts()
+    {
+        return $this->hasMany(Cart::class,'user_id');
+    }
+
 }

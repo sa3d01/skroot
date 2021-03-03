@@ -51,7 +51,7 @@ class PartDTO extends JsonResource
             ],
             "year" => (int)$this["year"],
             "price" => (double)$this["price"],
-            "manufacturer" => "Dummy Manufacturer",
+            "part_number" => $this["part_number"],
             "images_urls" => $this->images_urls,
             'is_wished'=>$is_wished
         ];
