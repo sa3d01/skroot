@@ -15,6 +15,8 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
     {
+        $upload_count=10;
+        $counter=0;
         foreach ($rows as $row) {
             $car = CarBrand::whereTranslation("name", $row["manufacturer"])->first();
             if (!$car) {
@@ -40,7 +42,13 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
                     "en" => ["name" => $row["category"]],
                     "ar" => ["name" => $row["category"]],
                 ]);
-                $partCategory->addMediaFromUrl($row["online_category_image"])->toMediaCollection('part_categories');
+                if (filter_var($row["online_category_image"], FILTER_VALIDATE_URL)){
+                    try {
+                        $partCategory->addMediaFromUrl($row["online_category_image"])->toMediaCollection('part_categories');
+                    }catch (\Exception $exception){
+                        continue;
+                    }
+                }
             }
 
             $product = Product::where([
@@ -69,9 +77,15 @@ class CarBrandsImport implements ToCollection, WithHeadingRow
                         "description" => $row["discription"],
                     ],
                 ]);
-                $product->addMediaFromUrl($row["online_part_image"])->toMediaCollection('part_product_gallery');
+                if (filter_var($row["online_part_image"], FILTER_VALIDATE_URL)){
+                    try {
+                        $product->addMediaFromUrl($row["online_part_image"])->toMediaCollection('part_product_gallery');
+                    }catch (\Exception $e){
+                        continue;
+                    }
+                }
             }
-
+            $counter++;
         }
     }
 }

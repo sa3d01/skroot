@@ -12,11 +12,11 @@ class CarBrandController extends Controller
 {
     public function index()
     {
-        return CarBrandDTO::collection(CarBrand::paginate());
+        return CarBrandDTO::collection(CarBrand::all());
     }
 
     public function fetchModels(CarBrand $carBrand)
     {
-        return CarBrandModelDTO::collection(CarBrandModel::where("car_brand_id", $carBrand->id)->paginate());
+        return CarBrandModelDTO::collection(CarBrandModel::where("car_brand_id", $carBrand->id)->get());
     }
 }
